@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Los Hilos del Poder - Conservar</title>
+    <link rel="stylesheet" href="conservar.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Quicksand:wght@300;400;500;600&family=Special+Elite&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="title">✦ CONSERVAR EL HILO ✦</h1>
+
+        <!-- Narrativa principal -->
+        <div class="narrative-card" id="narrativeMain">
+            <p>Raúl mira hacia la puerta vacía antes de agacharse lentamente. El hilo vibra apenas entre el polvo y los cables debajo de la mesa. Con cuidado, lo envuelve alrededor de su mano y lo guarda dentro de la maleta, debajo del recipiente casi-vacío de su almuerzo.</p>
+            <p>Durante el trayecto a casa puede sentirlo moverse levemente cada vez que el bus se detiene.</p>
+            <p>Esa noche lo saca sobre la mesa de la cocina. Bajo la luz amarilla del apartamento, el hilo parece distinto: <span class="changing-thread">las letras cambian lentamente</span>, reorganizándose como si todavía estuvieran siendo pensadas.</p>
+            <p>Raúl observa nuevos fragmentos aparecer entre las curvas negras: <span class="hint" data-doc="rastros">nombres, fechas, edificios gubernamentales</span>.</p>
+            <p class="highlight">Entonces entiende algo peor. Los hilos no son restos. Son rastros.</p>
+            <p>Y si alguien pudiera seguirlos hasta su origen, también podría descubrir todo lo que intentaron esconder.</p>
+            <p>Raúl mira la maleta abierta. Afuera, un carro permanece estacionado frente al edificio desde hace más de una hora.</p>
+        </div>
+
+        <!-- Subdecisión (solo se muestra después de un momento) -->
+        <div id="subDecision" class="subdecision hidden">
+            <h2>⚡ ¿QUÉ HACES AHORA, RAÚL? ⚡</h2>
+            <div class="subchoice-cards">
+                <div class="subchoice-card" data-sub="investigar">
+                    <div class="sub-icon">🔍</div>
+                    <h3>Investigar los rastros</h3>
+                    <p>Seguir las pistas, buscar conexiones. Puede ser peligroso, pero la verdad te inquieta.</p>
+                </div>
+                <div class="subchoice-card" data-sub="quemar">
+                    <div class="sub-icon">🔥</div>
+                    <h3>Quemar el hilo</h3>
+                    <p>Destruir la prueba y olvidar. Volver a la rutina, pero la paranoia te acompañará.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Documentos interactivos (rastros) -->
+        <div class="memory-docs">
+            <div class="doc-item" data-doc="exp1">
+                <img src="assets/img/PHOTO-2026-05-21-16-19-22 4.jpg" alt="Expediente restringido">
+                <p>Propiedad del gobierno</p>
+            </div>
+            <div class="doc-item" data-doc="exp2">
+                <img src="assets/img/PHOTO-2026-05-21-16-19-23.jpg" alt="Finanzas">
+                <p>Departamento de Finanzas</p>
+            </div>
+        </div>
+
+        <!-- Botones finales (reinicio, créditos) -->
+        <div class="actions">
+            <button id="restartBtn">◀ Volver a empezar</button>
+            <button id="creditsBtn">Créditos</button>
+        </div>
+    </div>
+
+    <!-- Popup para documentos -->
+    <div id="docPopup" class="popup">
+        <div class="popup-content">
+            <img id="popupImg" src="" alt="Documento">
+            <button class="close-popup">Cerrar</button>
+        </div>
+    </div>
+
+    <!-- Canvas de hilos animados -->
+    <canvas id="threadCanvas"></canvas>
+
+    <!-- Sonidos -->
+    <audio id="busSound" src="assets/audio/bus-movement.mp3" preload="auto"></audio>
+    <audio id="paperSound" src="assets/audio/paper-flip.mp3" preload="auto"></audio>
+    <audio id="carEngine" src="assets/audio/car-idle.mp3" loop preload="auto"></audio>
+    <audio id="fireSound" src="assets/audio/fire-burn.mp3" preload="auto"></audio>
+
+    <script src="conservar.js"></script>
+</body>
+</html>

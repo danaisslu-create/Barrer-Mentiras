@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Los Hilos del Poder - Introducción</title>
+    <link rel="stylesheet" href="index.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Quicksand:wght@300;400;500;600&family=Special+Elite&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Overlay de "clasificado" animado (opcional) -->
+    <div class="classified-overlay" id="classifiedOverlay"></div>
+
+    <!-- Contenedor principal -->
+    <div class="container">
+        <h1 class="title">✦ LOS HILOS DEL PODER ✦</h1>
+        <div class="narrative-card" id="narrativeCard">
+            <!-- El texto se irá mostrando con JS (efecto máquina) -->
+        </div>
+
+        <!-- Elementos interactivos que abren popups (imágenes) -->
+        <div class="interactive-hints">
+            <span class="hint" data-doc="presidente">📄 presidente</span>
+            <span class="hint" data-doc="hilos">🕸️ hilos</span>
+            <span class="hint" data-doc="bolsa">🗑️ bolsa negra</span>
+        </div>
+
+        <!-- Sección de decisión (oculta al inicio) -->
+        <div id="decisionSection" class="decision-section">
+            <h2>⚡ ¿QUÉ HACES, RAÚL? ⚡</h2>
+            <div class="choice-cards">
+                <div class="choice-card" data-choice="ignorar">
+                    <div class="card-icon">🧹</div>
+                    <h3>Ignorar el hilo</h3>
+                    <p>Cierra la bolsa, sigue con su rutina. El peso de la duda le acompañará siempre.</p>
+                </div>
+                <div class="choice-card" data-choice="conservar">
+                    <div class="card-icon">📦</div>
+                    <h3>Conservar el hilo</h3>
+                    <p>Lo guarda en su maleta. En casa, las letras se reorganizan. Los rastros comienzan a revelarse.</p>
+                </div>
+                <div class="choice-card" data-choice="abrir">
+                    <div class="card-icon">🚪</div>
+                    <h3>Dejar la bolsa entreabierta</h3>
+                    <p>Alguien más lo encuentra. Las consecuencias son inmediatas y violentas.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botón para reiniciar (solo visible al final de la historia, pero aquí no necesario) -->
+    </div>
+
+    <!-- Popup para documentos (se muestra al hacer clic en palabras resaltadas) -->
+    <div id="docPopup" class="popup">
+        <div class="popup-content">
+            <img id="popupImg" src="" alt="Documento confidencial">
+            <button class="close-popup">Cerrar</button>
+        </div>
+    </div>
+
+    <!-- Hilos decorativos animados (fondos) -->
+    <canvas id="threadCanvas"></canvas>
+
+    <!-- Sonidos (se cargan con JS, se inician al primer clic) -->
+    <audio id="ambienceSound" loop preload="auto">
+        <source src="assets/audio/office-ambience.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="index.js"></script>
+</body>
+</html>
