@@ -52,7 +52,7 @@ function drawThreads() {
 drawThreads();
 
 // =========================
-// 2. MOSTRAR LA DECISIÓN DEL USUARIO (localStorage)
+// 2. FUNCIÓN PARA MOSTRAR LA DECISIÓN
 // =========================
 function getDecisionText() {
     const decision = localStorage.getItem('decision');
@@ -90,63 +90,62 @@ function getDecisionText() {
     return text;
 }
 
-const decisionDiv = document.getElementById('decisionDisplay');
-if (decisionDiv) {
-    decisionDiv.innerHTML = `<p>${getDecisionText()}</p>`;
-}
-
 // =========================
-// 3. MÚSICA DE FONDO CON PLAY/PAUSE
+// 3. INICIALIZAR TODO CUANDO EL DOM ESTÉ LISTO
 // =========================
 document.addEventListener('DOMContentLoaded', () => {
+    // Mostrar texto de decisión
+    const decisionDiv = document.getElementById('decisionDisplay');
+    if (decisionDiv) {
+        decisionDiv.innerHTML = `<p>${getDecisionText()}</p>`;
+    }
+
+    // ========== MÚSICA ==========
     const music = document.getElementById('bgMusic');
     const playPauseBtn = document.getElementById('playPauseBtn');
-    if (!music || !playPauseBtn) return;
-    
-    let musicPlaying = false;
-    music.volume = 0.3;
-    
-    // Intentar autoplay (muchos navegadores lo bloquean)
-    music.play().then(() => {
-        musicPlaying = true;
-        playPauseBtn.innerHTML = '🔊 Pausar música';
-    }).catch(e => {
-        console.log("Autoplay bloqueado, esperando interacción del usuario");
-        playPauseBtn.innerHTML = '🔇 Reproducir música';
-        musicPlaying = false;
-    });
-    
-    playPauseBtn.addEventListener('click', () => {
-        if (musicPlaying) {
-            music.pause();
+    if (music && playPauseBtn) {
+        let musicPlaying = false;
+        music.volume = 0.3;
+        
+        music.play().then(() => {
+            musicPlaying = true;
+            playPauseBtn.innerHTML = '🔊 Pausar música';
+        }).catch(() => {
             playPauseBtn.innerHTML = '🔇 Reproducir música';
             musicPlaying = false;
-        } else {
-            music.play().then(() => {
-                playPauseBtn.innerHTML = '🔊 Pausar música';
-                musicPlaying = true;
-            }).catch(err => console.log("Error al reproducir:", err));
-        }
-    });
-});
+        });
+        
+        playPauseBtn.addEventListener('click', () => {
+            if (musicPlaying) {
+                music.pause();
+                playPauseBtn.innerHTML = '🔇 Reproducir música';
+                musicPlaying = false;
+            } else {
+                music.play().then(() => {
+                    playPauseBtn.innerHTML = '🔊 Pausar música';
+                    musicPlaying = true;
+                }).catch(e => console.log("Error al reproducir:", e));
+            }
+        });
+    }
 
-// =========================
-// 4. BOTONES DE NAVEGACIÓN
-// =========================
-document.getElementById('restartBtn').addEventListener('click', () => {
-    // Limpiar localStorage para empezar de verdad
-    localStorage.removeItem('decision');
-    localStorage.removeItem('subDecision');
-    localStorage.removeItem('abrirSubDecision');
-    localStorage.removeItem('ignorarWeight');
-    window.location.href = 'index.html';
-});
+    // ========== BOTONES ==========
+    const homeBtn = document.getElementById('homeBtn');
+    const feedbackBtn = document.getElementById('feedbackBtn');
 
-document.getElementById('homeBtn').addEventListener('click', () => {
-    // No limpiamos localStorage para mantener el recuerdo de la partida
-    window.location.href = 'index.html';
-});
+    if (homeBtn) {
+        homeBtn.addEventListener('click', () => {
+            window.location.href = 'index.html';
+        });
+    } else {
+        console.error("Botón homeBtn no encontrado en el DOM");
+    }
 
-document.getElementById('feedbackBtn').addEventListener('click', () => {
-    window.location.href = 'feedback.html';
+    if (feedbackBtn) {
+        feedbackBtn.addEventListener('click', () => {
+            window.location.href = 'feedback.html';
+        });
+    } else {
+        console.error("Botón feedbackBtn no encontrado en el DOM");
+    }
 });
