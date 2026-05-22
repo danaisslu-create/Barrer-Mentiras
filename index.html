@@ -5,30 +5,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Los Hilos del Poder - Introducción</title>
     <link rel="stylesheet" href="index.css">
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Quicksand:wght@300;400;500;600&family=Special+Elite&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- Overlay de "clasificado" animado (opcional) -->
-    <div class="classified-overlay" id="classifiedOverlay"></div>
-
-    <!-- Contenedor principal -->
     <div class="container">
         <h1 class="title">✦ LOS HILOS DEL PODER ✦</h1>
-        <div class="narrative-card" id="narrativeCard">
-            <!-- El texto se irá mostrando con JS (efecto máquina) -->
+
+        <!-- Narrativa introductoria (texto completo, sin máquina de escribir) -->
+        <div class="narrative-card">
+            <p>Su reloj marca las 5:55 p.m. Raúl suspira y guarda lo que le queda de su comida en su maleta. De regreso a su turno, observa la rueda de prensa a través del vidrio. Ya sabe lo que verá, pero aún así se detiene unos segundos más de lo necesario.</p>
+            <p>Los murmullos del discurso se mezclan con el ruido frenético de los reporteros. El presidente sonríe. Siempre sonríe. Y entonces aparecen: los hilos. Gruesos y delgados, tensos, saliendo de su cabeza como serpientes enredadas. Palabras que no fueron dichas. Intenciones que no llegaron al micrófono. Mentiras...</p>
+            <p>Raúl aprieta el mango de la escoba. Hasta ahora, su trabajo ha sido claro: barrer; recoger; embolsar; olvidar. Pero el día de hoy algo va a cambiar.</p>
+            <p>Cuando entra a la sala vacía, el silencio pesa. Saluda al presidente, como siempre, y comienza a barrer. Sin embargo, esta vez no aparta la mirada. Lee fragmentos mientras los junta: promesas rotas, acuerdos ocultos, decisiones calculadas.</p>
+            <p>Entonces lo ve. Un hilo más grueso que los demás queda atrapado bajo la mesa. Late, casi como si estuviera vivo.</p>
+            <p class="highlight">“Con este decreto por fin romperé el ciclo y no se necesitarán más presidentes”. Raúl se queda quieto. Debe tomar una decisión.</p>
         </div>
 
-        <!-- Elementos interactivos que abren popups (imágenes) -->
-        <div class="interactive-hints">
-            <span class="hint" data-doc="presidente">📄 presidente</span>
-            <span class="hint" data-doc="hilos">🕸️ hilos</span>
-            <span class="hint" data-doc="bolsa">🗑️ bolsa negra</span>
+        <!-- Expedientes interactivos (popups con imágenes ilustrativas) -->
+        <div class="expedientes-grid">
+            <div class="expediente" data-exp="presidente">
+                <div class="expediente-icon">📜</div>
+                <h3>Expediente: Presidente</h3>
+                <p>Click para abrir</p>
+            </div>
+            <div class="expediente" data-exp="hilos">
+                <div class="expediente-icon">🕸️</div>
+                <h3>Expediente: Los Hilos</h3>
+                <p>Click para abrir</p>
+            </div>
+            <div class="expediente" data-exp="bolsa">
+                <div class="expediente-icon">🗑️</div>
+                <h3>Expediente: Bolsa Negra</h3>
+                <p>Click para abrir</p>
+            </div>
+            <div class="expediente" data-exp="raul">
+                <div class="expediente-icon">🧹</div>
+                <h3>Ficha: Raúl</h3>
+                <p>Conoce al protagonista</p>
+            </div>
+        </div>
+
+        <!-- Indicador de que se debe abrir un expediente -->
+        <div id="hintMessage" class="hint-message">
+            <span>🔍 Abre al menos un expediente para continuar...</span>
         </div>
 
         <!-- Sección de decisión (oculta al inicio) -->
         <div id="decisionSection" class="decision-section">
+            <div class="arrow-animation">▼</div>
             <h2>⚡ ¿QUÉ HACES, RAÚL? ⚡</h2>
             <div class="choice-cards">
                 <div class="choice-card" data-choice="ignorar">
@@ -48,22 +73,19 @@
                 </div>
             </div>
         </div>
-
-        <!-- Botón para reiniciar (solo visible al final de la historia, pero aquí no necesario) -->
     </div>
 
-    <!-- Popup para documentos (se muestra al hacer clic en palabras resaltadas) -->
-    <div id="docPopup" class="popup">
+    <!-- Popup genérico para expedientes (documentos + imágenes) -->
+    <div id="expPopup" class="popup">
         <div class="popup-content">
-            <img id="popupImg" src="" alt="Documento confidencial">
-            <button class="close-popup">Cerrar</button>
+            <button class="close-popup">✕</button>
+            <h2 id="popupTitle"></h2>
+            <img id="popupImage" src="" alt="Expediente">
+            <p id="popupText"></p>
         </div>
     </div>
 
-    <!-- Hilos decorativos animados (fondos) -->
     <canvas id="threadCanvas"></canvas>
-
-    <!-- Sonidos (se cargan con JS, se inician al primer clic) -->
     <audio id="ambienceSound" loop preload="auto">
         <source src="assets/audio/office-ambience.mp3" type="audio/mpeg">
     </audio>

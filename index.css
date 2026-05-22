@@ -14,7 +14,6 @@ body {
     overflow-x: hidden;
 }
 
-/* Fondo de textura de papel (imagen o pattern) */
 body::before {
     content: "";
     position: fixed;
@@ -22,7 +21,7 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('assets/img/paper-texture.jpg'); /* Opcional: textura de papel */
+    background-image: url('assets/img/paper-texture.jpg');
     opacity: 0.08;
     pointer-events: none;
     z-index: 0;
@@ -60,38 +59,98 @@ body::before {
     line-height: 1.6;
     margin-bottom: 2rem;
     font-family: 'Quicksand', sans-serif;
-    white-space: pre-wrap;
 }
 
-/* Palabras interactivas */
-.interactive-hints {
-    display: flex;
-    gap: 1.5rem;
-    justify-content: center;
-    margin-bottom: 2rem;
-    flex-wrap: wrap;
+.narrative-card p {
+    margin-bottom: 1rem;
 }
-.hint {
-    background: rgba(0,0,0,0.5);
-    border: 1px solid #d4af37;
-    border-radius: 2rem;
-    padding: 0.4rem 1rem;
-    font-size: 0.9rem;
+
+.narrative-card .highlight {
+    color: #d4af37;
+    font-weight: bold;
+    text-align: center;
     font-family: 'Special Elite', monospace;
+    font-size: 1.2rem;
+}
+
+/* Expedientes (grid interactivo) */
+.expedientes-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+.expediente {
+    background: rgba(0,0,0,0.6);
+    border: 1px solid #d4af37;
+    border-radius: 1rem;
+    padding: 1rem;
+    width: 180px;
+    text-align: center;
     cursor: pointer;
     transition: 0.2s;
 }
-.hint:hover {
-    background: #d4af37;
-    color: #1a1a1a;
-    transform: scale(1.02);
+.expediente:hover {
+    background: rgba(212,175,55,0.2);
+    transform: translateY(-4px);
+    box-shadow: 0 0 12px #d4af37;
+}
+.expediente-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+.expediente h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem;
+    margin-bottom: 0.3rem;
+}
+.expediente p {
+    font-size: 0.8rem;
+    color: #ccc;
 }
 
-/* Sección de decisión */
+/* Mensaje de pista */
+.hint-message {
+    text-align: center;
+    margin: 1rem 0;
+    font-family: 'Special Elite', monospace;
+    color: #d4af37;
+    background: rgba(0,0,0,0.5);
+    padding: 0.5rem;
+    border-radius: 2rem;
+    display: inline-block;
+    width: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Sección de decisión (oculta inicialmente) */
 .decision-section {
     display: none;
     margin-top: 2rem;
     text-align: center;
+    animation: fadeInUp 0.6s ease;
+}
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.arrow-animation {
+    font-size: 2rem;
+    color: #d4af37;
+    animation: bounceArrow 1s infinite;
+    margin-bottom: 0.5rem;
+}
+@keyframes bounceArrow {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(10px); }
 }
 .decision-section h2 {
     font-family: 'DM Serif Display', serif;
@@ -119,7 +178,7 @@ body::before {
 .choice-card:hover {
     transform: translateY(-6px);
     border-color: #d4af37;
-    box-shadow: 0 0 20px rgba(212,175,55,0.3);
+    box-shadow: 0 0 25px rgba(212,175,55,0.5);
 }
 .card-icon {
     font-size: 3rem;
@@ -135,15 +194,15 @@ body::before {
     color: #ccc;
 }
 
-/* Popup */
+/* Popup (expedientes) */
 .popup {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.85);
-    backdrop-filter: blur(6px);
+    background: rgba(0,0,0,0.92);
+    backdrop-filter: blur(8px);
     display: none;
     align-items: center;
     justify-content: center;
@@ -151,27 +210,47 @@ body::before {
 }
 .popup-content {
     background: #1e1e1e;
-    max-width: 80%;
-    max-height: 80%;
+    max-width: 600px;
+    width: 90%;
     border-radius: 1.5rem;
-    padding: 1.5rem;
+    padding: 2rem;
     border-top: 6px solid #d4af37;
+    position: relative;
+    text-align: center;
+}
+.popup-content h2 {
+    font-family: 'DM Serif Display', serif;
+    color: #d4af37;
+    margin-bottom: 1rem;
 }
 .popup-content img {
     width: 100%;
+    max-height: 300px;
+    object-fit: contain;
     border-radius: 1rem;
+    margin: 1rem 0;
+    background: #0a0a0a;
+}
+.popup-content p {
+    color: #ddd;
+    font-size: 1rem;
+    line-height: 1.4;
 }
 .close-popup {
+    position: absolute;
+    top: 12px;
+    right: 15px;
     background: #d4af37;
     border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 2rem;
-    margin-top: 1rem;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
     cursor: pointer;
     font-weight: bold;
+    font-size: 1.2rem;
 }
 
-/* Canvas para hilos animados */
+/* Canvas */
 #threadCanvas {
     position: fixed;
     top: 0;
@@ -182,10 +261,10 @@ body::before {
     z-index: 1;
 }
 
-/* Responsive */
 @media (max-width: 700px) {
     body { padding: 1rem; }
     .title { font-size: 2rem; }
-    .narrative-card { font-size: 1rem; }
+    .narrative-card { font-size: 1rem; padding: 1rem; }
+    .expediente { width: 140px; }
     .choice-card { width: 220px; }
 }

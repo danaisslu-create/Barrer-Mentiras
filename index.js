@@ -1,116 +1,5 @@
 // =========================
-// 1. EFECTO MÁQUINA DE ESCRIBIR (narrativa)
-// =========================
-const narrativeSteps = [
-    "Su reloj marca las 5:55 p.m. Raúl suspira y guarda lo que le queda de su comida en su maleta. De regreso a su turno, observa la rueda de prensa a través del vidrio. Ya sabe lo que verá, pero aún así se detiene unos segundos más de lo necesario.",
-    "Los murmullos del discurso se mezclan con el ruido frenético de los reporteros. El presidente sonríe. Siempre sonríe. Y entonces aparecen: los hilos. Gruesos y delgados, tensos, saliendo de su cabeza como serpientes enredadas. Palabras que no fueron dichas. Intenciones que no llegaron al micrófono. Mentiras...",
-    "Raúl aprieta el mango de la escoba. Hasta ahora, su trabajo ha sido claro: barrer; recoger; embolsar; olvidar. Pero el día de hoy algo va a cambiar.",
-    "Cuando entra a la sala vacía, el silencio pesa. Saluda al presidente, como siempre, y comienza a barrer. Sin embargo, esta vez no aparta la mirada. Lee fragmentos mientras los junta: promesas rotas, acuerdos ocultos, decisiones calculadas.",
-    "Entonces lo ve. Un hilo más grueso que los demás queda atrapado bajo la mesa. Late, casi como si estuviera vivo.",
-    "“Con este decreto por fin romperé el ciclo y no se necesitarán más presidentes”. Raúl se queda quieto. Debe tomar una decisión."
-];
-
-const narrativeDiv = document.getElementById('narrativeCard');
-let step = 0;
-let typingTimeout = null;
-
-function typeText(text, element, callback) {
-    let i = 0;
-    element.innerHTML = '';
-    function typing() {
-        if (i < text.length) {
-            element.innerHTML += text.charAt(i);
-            i++;
-            typingTimeout = setTimeout(typing, 25);
-        } else {
-            if (callback) callback();
-        }
-    }
-    typing();
-}
-
-function startNarrative() {
-    if (step < narrativeSteps.length) {
-        const p = document.createElement('p');
-        p.style.marginBottom = '1rem';
-        narrativeDiv.appendChild(p);
-        typeText(narrativeSteps[step], p, () => {
-            step++;
-            startNarrative();
-        });
-    } else {
-        // Narrativa terminada, mostrar decisión
-        document.getElementById('decisionSection').style.display = 'block';
-        // Iniciar sonido ambiente (si no se ha iniciado)
-        iniciarSonidoAmbiente();
-    }
-}
-startNarrative();
-
-// =========================
-// 2. POPUPS DE DOCUMENTOS (imágenes)
-// =========================
-const docPopup = document.getElementById('docPopup');
-const popupImg = document.getElementById('popupImg');
-const closePopup = document.querySelector('.close-popup');
-
-// Mapeo de palabras clave a imágenes
-const docs = {
-    presidente: 'assets/img/PHOTO-2026-05-21-16-19-20 3.jpg',
-    hilos: 'assets/img/PHOTO-2026-05-21-16-19-21 3.jpg',
-    bolsa: 'assets/img/PHOTO-2026-05-21-16-19-22 4.jpg'
-};
-
-document.querySelectorAll('.hint').forEach(el => {
-    el.addEventListener('click', () => {
-        const key = el.getAttribute('data-doc');
-        if (docs[key]) {
-            popupImg.src = docs[key];
-            docPopup.style.display = 'flex';
-            // Pequeño sonido de papel (opcional)
-        }
-    });
-});
-closePopup.addEventListener('click', () => docPopup.style.display = 'none');
-docPopup.addEventListener('click', (e) => {
-    if (e.target === docPopup) docPopup.style.display = 'none';
-});
-
-// =========================
-// 3. SELECCIÓN DE RAMA Y REDIRECCIÓN
-// =========================
-document.querySelectorAll('.choice-card').forEach(card => {
-    card.addEventListener('click', (e) => {
-        const choice = card.getAttribute('data-choice');
-        // Guardar decisión en localStorage (para créditos)
-        localStorage.setItem('decision', choice);
-        // Redirigir según elección
-        if (choice === 'ignorar') window.location.href = 'ignorar.html';
-        else if (choice === 'conservar') window.location.href = 'conservar.html';
-        else if (choice === 'abrir') window.location.href = 'abrir.html';
-    });
-});
-
-// =========================
-// 4. SONIDO AMBIENTE (se inicia con interacción)
-// =========================
-const ambience = document.getElementById('ambienceSound');
-let ambientStarted = false;
-
-function iniciarSonidoAmbiente() {
-    if (!ambientStarted && ambience) {
-        ambience.volume = 0.3;
-        ambience.play().catch(e => console.log("Audio no permitido aún"));
-        ambientStarted = true;
-    }
-}
-// Al hacer clic en cualquier lugar, intentar iniciar sonido
-document.body.addEventListener('click', () => {
-    if (!ambientStarted) iniciarSonidoAmbiente();
-}, { once: true });
-
-// =========================
-// 5. ANIMACIÓN DE HILOS (canvas)
+// 1. ANIMACIÓN DE HILOS (canvas)
 // =========================
 const canvas = document.getElementById('threadCanvas');
 const ctx = canvas.getContext('2d');
@@ -127,9 +16,7 @@ window.addEventListener('resize', resizeCanvas);
 resizeCanvas();
 
 const threads = [];
-const THREAD_COUNT = 35;
-
-for (let i = 0; i < THREAD_COUNT; i++) {
+for (let i = 0; i < 40; i++) {
     threads.push({
         x: Math.random() * width,
         y: Math.random() * height,
@@ -152,11 +39,9 @@ function drawThreads() {
         ctx.strokeStyle = `rgba(212, 175, 55, ${t.opacity})`;
         ctx.lineWidth = t.thickness;
         ctx.stroke();
-        // Mover suavemente
         t.angle += 0.01 * t.speed;
         t.x += Math.sin(Date.now() * 0.0005 + t.angle) * 0.2;
         t.y += Math.cos(Date.now() * 0.0003 + t.angle) * 0.2;
-        // Rebotar en bordes
         if (t.x < -50) t.x = width + 50;
         if (t.x > width + 50) t.x = -50;
         if (t.y < -50) t.y = height + 50;
@@ -165,3 +50,123 @@ function drawThreads() {
     requestAnimationFrame(drawThreads);
 }
 drawThreads();
+
+// =========================
+// 2. DATOS DE EXPEDIENTES (imágenes, textos)
+// =========================
+const expedientesData = {
+    presidente: {
+        titulo: "Expediente Presidencial",
+        img: "assets/img/PHOTO-2026-05-21-16-19-20 3.jpg",
+        texto: "Documento interno: declaraciones contradictorias, discursos ensayados. Los hilos de poder se tejen desde arriba."
+    },
+    hilos: {
+        titulo: "Los Hilos del Poder",
+        img: "assets/img/PHOTO-2026-05-21-16-19-21 3.jpg",
+        texto: "Fragmentos de mentiras entrelazadas. Cada hilo contiene una promesa rota o un acuerdo oculto. Latente, palpitante."
+    },
+    bolsa: {
+        titulo: "Bolsas Confidenciales",
+        img: "assets/img/PHOTO-2026-05-21-16-19-22 4.jpg",
+        texto: "Residuos del poder: documentos censurados, cifrados, destinados al olvido. Alguien los clasifica como 'basura'."
+    },
+    raul: {
+        titulo: "Ficha de Personaje: Raúl",
+        img: "assets/img/raul-profile.jpg", // Necesitarás una imagen de perfil (puedes usar un placeholder)
+        texto: "Trabajador de limpieza en el palacio de gobierno. Silencioso, observador. Un día decidió que barrer no era suficiente."
+    }
+};
+
+// =========================
+// 3. POPUP DE EXPEDIENTES
+// =========================
+const popup = document.getElementById('expPopup');
+const popupTitle = document.getElementById('popupTitle');
+const popupImage = document.getElementById('popupImage');
+const popupText = document.getElementById('popupText');
+const closePopupBtn = document.querySelector('.close-popup');
+
+let expedientesAbiertos = 0; // contador para desbloquear la decisión
+const decisionSection = document.getElementById('decisionSection');
+const hintMessage = document.getElementById('hintMessage');
+
+function abrirExpediente(tipo) {
+    const data = expedientesData[tipo];
+    if (data) {
+        popupTitle.innerText = data.titulo;
+        popupImage.src = data.img;
+        popupText.innerText = data.texto;
+        popup.style.display = 'flex';
+        // Incrementar contador la primera vez que se abre un expediente
+        if (expedientesAbiertos === 0) {
+            expedientesAbiertos++;
+            // Mostrar sección de decisión después de un breve retraso (para dar tiempo a ver el popup)
+            setTimeout(() => {
+                decisionSection.style.display = 'block';
+                hintMessage.style.display = 'none';
+                // Efecto de brillo en los botones (opcional)
+                document.querySelectorAll('.choice-card').forEach(card => {
+                    card.style.animation = 'glowPulse 1s infinite';
+                });
+            }, 300);
+        } else {
+            expedientesAbiertos++;
+        }
+        // Sonido de papel (opcional)
+    }
+}
+
+// Asignar eventos a los expedientes
+document.querySelectorAll('.expediente').forEach(exp => {
+    exp.addEventListener('click', () => {
+        const tipo = exp.getAttribute('data-exp');
+        abrirExpediente(tipo);
+    });
+});
+
+closePopupBtn.addEventListener('click', () => {
+    popup.style.display = 'none';
+});
+popup.addEventListener('click', (e) => {
+    if (e.target === popup) popup.style.display = 'none';
+});
+
+// =========================
+// 4. SELECCIÓN DE RAMA (solo visible después de abrir un expediente)
+// =========================
+document.querySelectorAll('.choice-card').forEach(card => {
+    card.addEventListener('click', () => {
+        const choice = card.getAttribute('data-choice');
+        localStorage.setItem('decision', choice);
+        if (choice === 'ignorar') window.location.href = 'ignorar.html';
+        else if (choice === 'conservar') window.location.href = 'conservar.html';
+        else if (choice === 'abrir') window.location.href = 'abrir.html';
+    });
+});
+
+// =========================
+// 5. SONIDO AMBIENTE
+// =========================
+const ambience = document.getElementById('ambienceSound');
+let ambientStarted = false;
+function iniciarSonidoAmbiente() {
+    if (!ambientStarted && ambience) {
+        ambience.volume = 0.3;
+        ambience.play().catch(e => console.log("Audio no permitido"));
+        ambientStarted = true;
+    }
+}
+document.body.addEventListener('click', () => {
+    if (!ambientStarted) iniciarSonidoAmbiente();
+}, { once: true });
+
+// Animación CSS para brillo de botones
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes glowPulse {
+        0% { box-shadow: 0 0 0 0 rgba(212,175,55,0.4); border-color: rgba(212,175,55,0.6); }
+        70% { box-shadow: 0 0 0 10px rgba(212,175,55,0); border-color: #d4af37; }
+        100% { box-shadow: 0 0 0 0 rgba(212,175,55,0); border-color: rgba(212,175,55,0.6); }
+    }
+`;
+document.head.appendChild(style);
