@@ -1,6 +1,5 @@
 /* ===========================================
-   CONSERVAR EL HILO - ESTILOS
-   Tonos: tierra, amarillo quemado, toques de rojo para alerta
+   CONSERVAR - EXPEDIENTE + FUEGO + MEDIDOR
    =========================================== */
 
 * {
@@ -19,7 +18,6 @@ body {
     overflow-x: hidden;
 }
 
-/* Textura de papel */
 body::before {
     content: "";
     position: fixed;
@@ -36,7 +34,7 @@ body::before {
 .container {
     max-width: 1100px;
     margin: 0 auto;
-    background: rgba(25, 20, 16, 0.8);
+    background: rgba(25, 20, 16, 0.85);
     backdrop-filter: blur(12px);
     border-radius: 2rem;
     padding: 2rem;
@@ -56,8 +54,43 @@ body::before {
     text-shadow: 0 0 6px rgba(0,0,0,0.5);
 }
 
+/* MEDIDOR DE RASTRO */
+.trace-meter {
+    margin: 1rem 0 2rem;
+    background: rgba(0,0,0,0.6);
+    border-radius: 1rem;
+    padding: 0.5rem 1rem;
+}
+.meter-label {
+    font-family: 'Special Elite', monospace;
+    font-size: 0.8rem;
+    text-align: center;
+    color: #e6c88a;
+    letter-spacing: 2px;
+}
+.meter-bar {
+    background: #2a2a2a;
+    border-radius: 1rem;
+    height: 12px;
+    overflow: hidden;
+    margin: 0.3rem 0;
+}
+.meter-fill {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, #e6c88a, #c97a5a);
+    transition: width 0.5s ease;
+}
+.trace-message {
+    font-family: 'Special Elite', monospace;
+    font-size: 0.8rem;
+    text-align: center;
+    color: #c97a5a;
+}
+
+/* NARRATIVA CON PALABRAS CLAVE */
 .narrative-card {
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.7);
     border-left: 6px solid #e6c88a;
     border-radius: 1.5rem;
     padding: 2rem;
@@ -65,11 +98,21 @@ body::before {
     line-height: 1.6;
     margin-bottom: 2rem;
 }
-
 .narrative-card p {
     margin-bottom: 1rem;
 }
-
+.narrative-card .clue {
+    border-bottom: 2px dashed #e6c88a;
+    cursor: pointer;
+    transition: 0.2s;
+    background: rgba(230,200,138,0.1);
+    padding: 0 0.1rem;
+    font-family: 'Special Elite', monospace;
+}
+.narrative-card .clue:hover {
+    background: #e6c88a;
+    color: #1a1a1a;
+}
 .highlight {
     color: #e6c88a;
     font-weight: bold;
@@ -80,7 +123,6 @@ body::before {
     padding: 0.5rem;
     border-radius: 1rem;
 }
-
 .changing-thread {
     background: rgba(230,200,138,0.2);
     padding: 0.2rem 0.4rem;
@@ -88,21 +130,19 @@ body::before {
     animation: pulseLetter 1.2s infinite;
     display: inline-block;
 }
-
 @keyframes pulseLetter {
     0% { opacity: 0.7; text-shadow: 0 0 0px #e6c88a; }
     50% { opacity: 1; text-shadow: 0 0 6px #e6c88a; }
     100% { opacity: 0.7; text-shadow: 0 0 0px #e6c88a; }
 }
 
-/* Subdecisión (oculta al inicio) */
+/* SUBDECISIÓN */
 .subdecision {
     text-align: center;
     margin: 2rem 0;
     padding: 1.5rem;
     background: rgba(30,20,15,0.7);
     border-radius: 1.5rem;
-    transition: all 0.3s;
 }
 .subdecision h2 {
     font-family: 'DM Serif Display', serif;
@@ -144,7 +184,7 @@ body::before {
     color: #ddd;
 }
 
-/* Documentos */
+/* DOCUMENTOS MINIATURA */
 .memory-docs {
     display: flex;
     flex-wrap: wrap;
@@ -153,30 +193,31 @@ body::before {
     margin: 2rem 0;
 }
 .doc-item {
-    width: 130px;
+    width: 120px;
     cursor: pointer;
-    transition: transform 0.2s;
     text-align: center;
+    transition: 0.2s;
 }
 .doc-item img {
     width: 100%;
-    border-radius: 0.75rem;
+    border-radius: 0.5rem;
     border: 1px solid #e6c88a;
-    box-shadow: 0 6px 12px black;
+    box-shadow: 0 4px 8px black;
 }
 .doc-item p {
     font-size: 0.7rem;
-    margin-top: 0.5rem;
+    margin-top: 0.3rem;
+    font-family: 'Special Elite', monospace;
     color: #bbb;
 }
 .doc-item:hover {
     transform: scale(1.05);
 }
 
-/* Botones */
+/* BOTONES */
 .actions {
     text-align: center;
-    margin-top: 2rem;
+    margin-top: 1rem;
 }
 button {
     background: rgba(0,0,0,0.7);
@@ -194,45 +235,111 @@ button:hover {
     background: #e6c88a;
     color: #1a1a1a;
     transform: scale(1.02);
-    box-shadow: 0 0 10px #e6c88a;
 }
 
-/* Popup */
-.popup {
+/* POPUP EXPEDIENTE (mismo estilo que ignorar) */
+.expediente-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.9);
-    backdrop-filter: blur(8px);
+    background: rgba(0, 0, 0, 0.92);
+    backdrop-filter: blur(5px);
     display: none;
     align-items: center;
     justify-content: center;
-    z-index: 1000;
+    z-index: 2000;
 }
-.popup-content {
-    background: #1e1a14;
-    max-width: 85%;
-    max-height: 85%;
-    border-radius: 1.5rem;
-    padding: 1.5rem;
-    border-top: 6px solid #e6c88a;
+.expediente-card {
+    background: #ece3d5;
+    color: #1a1a1a;
+    width: 90%;
+    max-width: 650px;
+    border-radius: 0.5rem;
+    padding: 1.8rem;
+    position: relative;
+    border: 8px double #2a2a2a;
+    font-family: 'Courier New', monospace;
 }
-.popup-content img {
-    width: 100%;
-    border-radius: 1rem;
+.expediente-card .stamp {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: #8b0000;
+    color: white;
+    font-size: 0.7rem;
+    font-weight: bold;
+    padding: 0.2rem 0.6rem;
+    transform: rotate(10deg);
 }
-.close-popup {
-    background: #e6c88a;
+.expediente-card .stamp.red {
+    top: 50px;
+    background: #aa2e2e;
+    transform: rotate(-5deg);
+}
+.close-expediente {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: #5a3e2e;
     border: none;
-    padding: 0.4rem 1.2rem;
-    border-radius: 2rem;
-    margin-top: 1rem;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    color: white;
     cursor: pointer;
 }
+.expediente-card h2 {
+    text-align: center;
+    font-size: 1.5rem;
+    margin: 1rem 0;
+    border-bottom: 1px solid #5a3e2e;
+}
+.expediente-body img {
+    width: 100%;
+    border-radius: 0.3rem;
+    margin-bottom: 1rem;
+}
+.expediente-footer {
+    margin-top: 1rem;
+    font-size: 0.6rem;
+    text-align: center;
+    border-top: 1px dashed #5a3e2e;
+    padding-top: 0.5rem;
+}
 
-/* Canvas */
+/* ANIMACIÓN DE FUEGO (CSS) */
+.fire-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 3000;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    overflow: hidden;
+}
+.flame {
+    position: absolute;
+    bottom: 0;
+    width: 20px;
+    height: 100px;
+    background: linear-gradient(0deg, #ff8000, #ff2200, #ffaa00);
+    border-radius: 50% 50% 20% 20%;
+    filter: blur(4px);
+    animation: burn 0.8s infinite alternate ease-in-out;
+    opacity: 0;
+}
+@keyframes burn {
+    0% { height: 40px; opacity: 0.6; transform: scaleX(1);}
+    100% { height: 120px; opacity: 1; transform: scaleX(1.2);}
+}
+
+/* CANVAS HILOS */
 #threadCanvas {
     position: fixed;
     top: 0;
@@ -243,15 +350,11 @@ button:hover {
     z-index: 1;
 }
 
-/* Clase para ocultar */
 .hidden {
     display: none;
 }
 
-/* Responsive */
 @media (max-width: 700px) {
     body { padding: 1rem; }
     .title { font-size: 2rem; }
-    .narrative-card { font-size: 1rem; }
-    .subchoice-card { width: 200px; }
 }

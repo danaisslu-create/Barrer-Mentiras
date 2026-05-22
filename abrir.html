@@ -12,72 +12,104 @@
     <div class="container">
         <h1 class="title">✦ BOLSA ENTREABIERTA ✦</h1>
 
-        <!-- Narrativa completa (sin interrupción automática) -->
+        <!-- Narrativa con palabras clicables -->
         <div class="narrative-card" id="narrativeMain">
-            <p>Raúl se queda inmóvil frente a la bolsa negra. El hilo sobresale apenas por la abertura, moviéndose suavemente con el aire frío de la sala.</p>
+            <p>Raúl se queda inmóvil frente a la <span class="clue" data-doc="bolsa">bolsa negra</span>. El <span class="clue" data-doc="hilo">hilo</span> sobresale apenas por la abertura, moviéndose suavemente con el aire frío de la sala.</p>
             <p>Solo tendría que cerrarla. Un movimiento rápido. El mismo de siempre.</p>
             <p>Pero no lo hace.</p>
             <p>Deja la bolsa entreabierta con la esperanza de que de pronto alguien más vea el hilo después de que él se vaya y así deje de sentir que es su responsabilidad.</p>
             <p>Entonces, camina hacia su casillero, se cambia de ropa y recoge sus cosas.</p>
-            <p>Pocos minutos después escucha pasos acercándose por el pasillo. Raúl sale corriendo de vuelta hacia la bolsa. Una periodista entra apresurada buscando el celular que olvidó sobre una silla. Apenas cruza la puerta, disminuye el paso.</p>
+            <p>Pocos minutos después escucha pasos acercándose por el pasillo. Raúl sale corriendo de vuelta hacia la bolsa. Una <span class="clue" data-doc="periodista">periodista</span> entra apresurada buscando el celular que olvidó sobre una silla. Apenas cruza la puerta, disminuye el paso.</p>
             <p>Sus ojos se fijan en la bolsa abierta.</p>
             <p class="highlight">—¿Qué es eso...? —murmura.</p>
             <p>Raúl siente cómo se le seca la garganta. La periodista se acerca lentamente, como si estuviera intentando entender algo fuera de foco. Entonces lee el hilo en voz baja:</p>
-            <p class="thread-quote">“...por fin romperé el ciclo y no necesitaremos más presidentes”.</p>
+            <p class="thread-quote">“...por fin romperé el ciclo y no necesitaremos más <span class="clue" data-doc="presidente">presidentes</span>”.</p>
             <p>—Señorita, ¿qué hace acá?</p>
             <p>Ella voltea a mirarlo. El silencio pesa durante un segundo eterno. Parecen comunicarse con la mirada.</p>
             <p>Ella se tapa la boca con la mano en sorpresa, como si entendiera lo que acababa de leer.</p>
         </div>
 
-        <!-- Elemento que dispara el apagón (botón o imagen) -->
-        <div class="trigger-container">
-            <button id="triggerBlackoutBtn" class="trigger-button">💥 ¿Qué ocurre después? 💥</button>
-            <p class="trigger-hint">(Haz clic para continuar... si te atreves)</p>
+        <!-- Medidor de Peso de la Decisión -->
+        <div class="consequence-meter">
+            <div class="meter-label">PESO DE LA DECISIÓN</div>
+            <div class="meter-bar">
+                <div id="decisionWeight" class="meter-fill" style="width: 0%;"></div>
+            </div>
+            <div id="weightMessage" class="weight-message"></div>
+        </div>
+
+        <!-- Subdecisión (aparece al alcanzar cierto peso o al final) -->
+        <div id="subDecision" class="subdecision hidden">
+            <h2>⚡ ¿QUÉ HACES, RAÚL? ⚡</h2>
+            <div class="subchoice-cards">
+                <div class="subchoice-card" data-sub="proteger">
+                    <div class="sub-icon">🛡️</div>
+                    <h3>Proteger a la periodista</h3>
+                    <p>Intentas sacarla de la sala antes de que sea demasiado tarde.</p>
+                </div>
+                <div class="subchoice-card" data-sub="huir">
+                    <div class="sub-icon">🏃</div>
+                    <h3>Huir y salvarse</h3>
+                    <p>El miedo puede más. Sales corriendo y la dejas sola.</p>
+                </div>
+            </div>
         </div>
 
         <!-- Documentos (evidencia) -->
         <div class="memory-docs">
             <div class="doc-item" data-doc="exp1">
                 <img src="assets/img/PHOTO-2026-05-21-16-19-20 3.jpg" alt="Silencio">
-                <p>El silencio era inútil</p>
+                <p>▪️ EXP. 001 ▪️</p>
             </div>
             <div class="doc-item" data-doc="exp2">
                 <img src="assets/img/PHOTO-2026-05-21-16-19-21 4.jpg" alt="Secretos atrapados">
-                <p>Confidencial</p>
+                <p>▪️ EXP. 002 ▪️</p>
             </div>
             <div class="doc-item" data-doc="exp3">
                 <img src="assets/img/PHOTO-2026-05-21-16-19-22 2.jpg" alt="Registros">
-                <p>Registros</p>
+                <p>▪️ EXP. 003 ▪️</p>
             </div>
         </div>
 
-        <!-- Botones de reinicio y créditos (normales) -->
+        <!-- Botón que dispara el apagón (solo visible después de la subdecisión) -->
+        <div id="triggerContainer" class="trigger-container hidden">
+            <button id="triggerBlackoutBtn" class="trigger-button">💀 REVELAR EL DESENLACE 💀</button>
+        </div>
+
         <div class="actions">
             <button id="restartBtn">◀ Volver a empezar</button>
         </div>
     </div>
 
-    <!-- Popup para documentos -->
-    <div id="docPopup" class="popup">
-        <div class="popup-content">
-            <img id="popupImg" src="" alt="Documento">
-            <button class="close-popup">Cerrar</button>
+    <!-- POPUP DE EXPEDIENTE CLASIFICADO -->
+    <div id="expedientePopup" class="expediente-overlay">
+        <div class="expediente-card">
+            <div class="stamp">CONFIDENCIAL</div>
+            <div class="stamp red">CLASIFICADO</div>
+            <button class="close-expediente">✕</button>
+            <h2 id="expedienteTitulo">Título</h2>
+            <div class="expediente-body">
+                <img id="expedienteImg" src="" alt="Documento">
+                <p id="expedienteDesc"></p>
+            </div>
+            <div class="expediente-footer">
+                <span>PROPIEDAD DEL GOBIERNO DE COLOMBIA</span>
+                <span>MINISTERIO DE JUSTICIA</span>
+            </div>
         </div>
     </div>
 
-    <!-- Overlay de apagón (pantalla negra) -->
+    <!-- Overlay de apagón final -->
     <div id="blackoutOverlay" class="blackout">
         <div class="blackout-content">
             <h2 class="blackout-title">✧ EXPEDIENTE CERRADO ✧</h2>
-            <p class="blackout-text">La periodista desapareció. Nadie volvió a ver a Raúl.<br>El caso quedó archivado como "accidente laboral".</p>
+            <p id="blackoutText" class="blackout-text">La periodista desapareció. Nadie volvió a ver a Raúl.<br>El caso quedó archivado como "accidente laboral".</p>
             <button id="creditsAfterBlackout" class="blackout-btn">Ir a Créditos</button>
         </div>
     </div>
 
-    <!-- Canvas de hilos (tenues) -->
     <canvas id="threadCanvas"></canvas>
 
-    <!-- Sonidos -->
     <audio id="footstepsSound" src="assets/audio/footsteps-approaching.mp3" preload="auto"></audio>
     <audio id="hitSound" src="assets/audio/heavy-hit.mp3" preload="auto"></audio>
     <audio id="staticSound" src="assets/audio/static-buzz.mp3" preload="auto"></audio>

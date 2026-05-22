@@ -10,26 +10,38 @@
 <body>
     <div class="container">
         <h1 class="title">✦ IGNORAR EL HILO ✦</h1>
-        <div class="narrative-card">
-            <p>Raúl cierra la bolsa con fuerza y aparta la mirada del hilo antes de volver a leerlo. El plástico negro cruje entre sus manos mientras pega la cinta de seguridad y acomoda todo junto a las demás bolsas “confidenciales”.</p>
+
+        <!-- Caja narrativa con palabras clicables (expedientes ocultos) -->
+        <div class="narrative-card" id="narrativeCard">
+            <p>Raúl cierra la <span class="clue" data-doc="bolsa">bolsa negra</span> con fuerza y aparta la mirada del <span class="clue" data-doc="hilo">hilo</span> antes de volver a leerlo. El plástico negro cruje entre sus manos mientras pega la cinta de seguridad y acomoda todo junto a las demás bolsas “confidenciales”.</p>
             <p>Después apaga las luces de la sala y sale al pasillo sin mirar atrás.</p>
             <p>El ascensor baja lentamente. Piso tras piso. Como siempre.</p>
             <p>Esa noche llega a casa, se quita el uniforme y deja correr agua caliente sobre sus manos por más tiempo de lo normal. Cena frente al televisor sin prestar atención a las noticias y se acuesta temprano.</p>
             <p>Pero no duerme.</p>
             <p>Cada vez que cierra los ojos vuelve a leer la frase atrapada debajo de la mesa. La imagina todavía ahí, latiendo apenas entre el polvo y las patas metálicas de las sillas.</p>
-            <p class="highlight">“...no necesitaremos más presidentes”.</p>
+            <p class="quote">“...no necesitaremos más <span class="clue" data-doc="presidente">presidentes</span>”.</p>
             <p>A la mañana siguiente regresa al trabajo. Barre nuevos restos, recoge nuevas mentiras y llena nuevas bolsas negras. Nadie menciona nada. Nadie actúa distinto.</p>
             <p>Y aun así, desde entonces, Raúl no logra volver a hacer su trabajo sin preguntarse qué habría pasado si hubiese dejado la bolsa abierta unos segundos más.</p>
         </div>
 
+        <!-- Medidor de "Peso de la decisión" (consecuencia visible) -->
+        <div class="consequence-meter">
+            <div class="meter-label">PESO DE LA DECISIÓN</div>
+            <div class="meter-bar">
+                <div id="decisionWeight" class="meter-fill" style="width: 0%;"></div>
+            </div>
+            <div id="weightMessage" class="weight-message"></div>
+        </div>
+
+        <!-- Documentos interactivos (miniatura de expedientes) -->
         <div class="memory-docs">
             <div class="doc-item" data-doc="exp1">
-                <img src="assets/img/PHOTO-2026-05-21-16-19-20 3.jpg" alt="Documento">
-                <p>Lo que decidió ignorar</p>
+                <img src="assets/img/PHOTO-2026-05-21-16-19-20 3.jpg" alt="Expediente">
+                <p>▪️ EXP. 001 ▪️</p>
             </div>
             <div class="doc-item" data-doc="exp2">
-                <img src="assets/img/PHOTO-2026-05-21-16-19-21 3.jpg" alt="Mentiras">
-                <p>Las palabras que aún resuenan</p>
+                <img src="assets/img/PHOTO-2026-05-21-16-19-21 3.jpg" alt="Expediente">
+                <p>▪️ EXP. 002 ▪️</p>
             </div>
         </div>
 
@@ -39,16 +51,28 @@
         </div>
     </div>
 
-    <div id="docPopup" class="popup">
-        <div class="popup-content">
-            <img id="popupImg" src="" alt="Documento">
-            <button class="close-popup">Cerrar</button>
+    <!-- POPUP DE EXPEDIENTE CLASIFICADO (estructura mejorada) -->
+    <div id="expedientePopup" class="expediente-overlay">
+        <div class="expediente-card">
+            <div class="stamp">CONFIDENCIAL</div>
+            <div class="stamp red">CLASIFICADO</div>
+            <button class="close-expediente">✕</button>
+            <h2 id="expedienteTitulo">Título del documento</h2>
+            <div class="expediente-body">
+                <img id="expedienteImg" src="" alt="Documento">
+                <p id="expedienteDesc"></p>
+            </div>
+            <div class="expediente-footer">
+                <span>PROPIEDAD DEL GOBIERNO DE COLOMBIA</span>
+                <span>MINISTERIO DE JUSTICIA</span>
+            </div>
         </div>
     </div>
 
     <canvas id="threadCanvas"></canvas>
     <audio id="bagSound" src="assets/audio/plastic-bag-crumple.mp3" preload="auto"></audio>
     <audio id="elevatorSound" src="assets/audio/elevator-ding.mp3" preload="auto"></audio>
+    <audio id="paperSound" src="assets/audio/paper-flip.mp3" preload="auto"></audio>
 
     <script src="ignorar.js"></script>
 </body>
