@@ -57,22 +57,22 @@ drawThreads();
 const expedientesData = {
     presidente: {
         titulo: "Expediente Presidencial",
-        img: "assets/img/PHOTO-2026-05-21-16-19-20 3.jpg",
+        img: "assets/img/raul con el expediente.jpg",
         texto: "Documento interno: declaraciones contradictorias, discursos ensayados. Los hilos de poder se tejen desde arriba."
     },
     hilos: {
         titulo: "Los Hilos del Poder",
-        img: "assets/img/PHOTO-2026-05-21-16-19-21 3.jpg",
+        img: "assets/img/raul con los hilos.jpg",
         texto: "Fragmentos de mentiras entrelazadas. Cada hilo contiene una promesa rota o un acuerdo oculto. Latente, palpitante."
     },
     bolsa: {
         titulo: "Bolsas Confidenciales",
-        img: "assets/img/PHOTO-2026-05-21-16-19-22 4.jpg",
+        img: "assets/img/bolsa negra.jpg",
         texto: "Residuos del poder: documentos censurados, cifrados, destinados al olvido. Alguien los clasifica como 'basura'."
     },
     raul: {
         titulo: "Ficha de Personaje: Raúl",
-        img: "assets/img/raul-profile.jpg", // Necesitarás una imagen de perfil (puedes usar un placeholder)
+        img: "assets/img/raul id.jpg", // Necesitarás una imagen de perfil (puedes usar un placeholder)
         texto: "Trabajador de limpieza en el palacio de gobierno. Silencioso, observador. Un día decidió que barrer no era suficiente."
     }
 };

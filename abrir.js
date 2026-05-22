@@ -57,37 +57,37 @@ drawThreads();
 const expedientes = {
     bolsa: {
         titulo: "✦ EXPEDIENTE: RESIDUOS CONFIDENCIALES ✦",
-        img: "assets/img/PHOTO-2026-05-21-16-19-20 3.jpg",
+        img: "assets/img/bolsas negras.jpg",
         desc: "Bolsas negras marcadas como 'material sensible'. Contienen fragmentos de discursos oficiales que nunca fueron pronunciados. El sello indica que su apertura sin autorización es un delito."
     },
     hilo: {
         titulo: "✦ EXPEDIENTE: HILO DE MEMORIA ✦",
-        img: "assets/img/PHOTO-2026-05-21-16-19-21 3.jpg",
+        img: "assets/img/raul observando al presidente.jpg",
         desc: "Fragmento de un decreto presidencial que buscaba 'romper el ciclo electoral'. Las palabras se reordenan solas. Parece que el documento sigue vivo, latiendo."
     },
     periodista: {
         titulo: "✦ EXPEDIENTE: PERIODISTA ✦",
-        img: "assets/img/PHOTO-2026-05-21-16-19-21 4.jpg",
+        img: "assets/img/raul con el expediente.jpg",
         desc: "Foto de archivo: una reportera de investigación que ha cubierto casos de corrupción. Su nombre aparece en varios expedientes clasificados."
     },
     presidente: {
         titulo: "✦ EXPEDIENTE: FIGURA PRESIDENCIAL ✦",
-        img: "assets/img/PHOTO-2026-05-21-16-19-22 4.jpg",
+        img: "assets/img/raul ve las mentiras del presidente.jpg",
         desc: "Borrador del discurso que nunca se emitió. La frase 'no necesitaremos más presidentes' está subrayada tres veces."
     },
     exp1: {
         titulo: "✦ EXPEDIENTE 001 - SILENCIO ✦",
-        img: "assets/img/PHOTO-2026-05-21-16-19-20 3.jpg",
+        img: "assets/img/raul descubirendo mentiras.jpg",
         desc: "Registro de llamadas interceptadas. Todos los testigos del caso guardaron silencio por órdenes superiores. El miedo es más efectivo que la justicia."
     },
     exp2: {
         titulo: "✦ EXPEDIENTE 002 - SECRETOS ✦",
-        img: "assets/img/PHOTO-2026-05-21-16-19-21 4.jpg",
+        img: "assets/img/raul con los hilos.jpg",
         desc: "Lista de nombres de funcionarios implicados en una red de ocultamiento de información. Algunos tachados, otros con notas 'pendiente de citación'."
     },
     exp3: {
         titulo: "✦ EXPEDIENTE 003 - REGISTROS ✦",
-        img: "assets/img/PHOTO-2026-05-21-16-19-22 2.jpg",
+        img: "assets/img/raul con el expediente.jpg",
         desc: "Documento interno del ministerio de gobierno. Detalla el protocolo para 'eliminar rastros' de ciertos expedientes."
     }
 };

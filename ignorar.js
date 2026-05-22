@@ -57,27 +57,27 @@ drawThreads();
 const expedientes = {
     bolsa: {
         titulo: "✦ EXPEDIENTE: RESIDUOS CONFIDENCIALES ✦",
-        img: "assets/img/PHOTO-2026-05-21-16-19-20 3.jpg",
+        img: "assets/img/bolsa negra.jpg",
         desc: "Bolsas negras clasificadas como 'material de alto riesgo'. El sello indica que su contenido no debe ser abierto por personal no autorizado. Raúl las ha manipulado durante años sin saber qué contenían."
     },
     hilo: {
         titulo: "✦ EXPEDIENTE: HILO DE MEMORIA ✦",
-        img: "assets/img/PHOTO-2026-05-21-16-19-21 3.jpg",
+        img: "assets/img/raul ve las mentiras del presidente.jpg",
         desc: "Fragmento de un discurso presidencial que nunca fue pronunciado. Las palabras se reordenan solas, como si tuvieran vida propia. Este hilo pertenece a una categoría especial: 'material sensible'."
     },
     presidente: {
         titulo: "✦ EXPEDIENTE: FIGURA PRESIDENCIAL ✦",
-        img: "assets/img/PHOTO-2026-05-21-16-19-22 4.jpg",
+        img: "assets/img/raul con el expediente.jpg",
         desc: "Documento interno que muestra la planificación de un decreto para 'romper el ciclo'. Las firmas aún están frescas. El gobierno busca perpetuarse sin elecciones."
     },
     exp1: {
         titulo: "✦ EXPEDIENTE 001 - SILENCIO ✦",
-        img: "assets/img/PHOTO-2026-05-21-16-19-20 3.jpg",
+        img: "assets/img/raul con los hilos.jpg",
         desc: "Registro de llamadas interceptadas. Todos los testigos del caso guardaron silencio por órdenes superiores. El miedo es más efectivo que la justicia."
     },
     exp2: {
         titulo: "✦ EXPEDIENTE 002 - MENTIRAS ✦",
-        img: "assets/img/PHOTO-2026-05-21-16-19-21 3.jpg",
+        img: "assets/img/hilos en una bolsa.jpg",
         desc: "Lista de promesas rotas durante los últimos tres gobiernos. Cada frase tachada es una verdad que nunca salió a la luz."
     }
 };

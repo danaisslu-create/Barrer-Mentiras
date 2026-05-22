@@ -57,32 +57,32 @@ drawThreads();
 const expedientes = {
     hilo: {
         titulo: "✦ EXPEDIENTE: HILO DE MEMORIA ✦",
-        img: "assets/img/PHOTO-2026-05-21-16-19-21 3.jpg",
+        img: "assets/img/raul con el expediente.jpg",
         desc: "Fragmento de un discurso que nunca fue pronunciado. Las palabras cambian solas. Este hilo pertenece a una categoría especial: 'material sensible'."
     },
     maleta: {
         titulo: "✦ EXPEDIENTE: PERTENENCIAS ✦",
-        img: "assets/img/PHOTO-2026-05-21-16-19-20 3.jpg",
+        img: "assets/img/raul cerrando bolsa.jpg",
         desc: "La maleta de Raúl contiene restos de expedientes clasificados. El forro tiene manchas de tinta borrada."
     },
     rastros: {
         titulo: "✦ EXPEDIENTE: RASTROS ✦",
-        img: "assets/img/PHOTO-2026-05-21-16-19-22 4.jpg",
+        img: "assets/img/raul ve las mentiras del presidente.jpg",
         desc: "Nombres: Gómez, Martínez, López. Fechas: todas coinciden con cambios de gobierno. Edificios: ministerios, sedes alternas."
     },
     carro: {
         titulo: "✦ EXPEDIENTE: VIGILANCIA ✦",
-        img: "assets/img/PHOTO-2026-05-21-16-19-23.jpg",
+        img: "assets/img/raul observando al presidente.jpg",
         desc: "El vehículo gris con vidrios polarizados lleva tres días estacionado. Placas oficiales."
     },
     exp1: {
         titulo: "✦ EXP. 001 - PROPIEDAD GUBERNAMENTAL ✦",
-        img: "assets/img/PHOTO-2026-05-21-16-19-22 4.jpg",
+        img: "assets/img/raul con el expediente.jpg",
         desc: "Documento que certifica la transferencia de fondos a cuentas off shore."
     },
     exp2: {
         titulo: "✦ EXP. 002 - FINANZAS OCULTAS ✦",
-        img: "assets/img/PHOTO-2026-05-21-16-19-23.jpg",
+        img: "assets/img/raul conservando hilos.jpg",
         desc: "Registro de movimientos bancarios del ministerio. Hay un desfase de millones sin explicación."
     }
 };
