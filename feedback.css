@@ -1,0 +1,121 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    min-height: 100vh;
+    background: radial-gradient(circle at 20% 30%, #1a1a1a 0%, #0a0a0a 100%);
+    font-family: 'Quicksand', sans-serif;
+    color: #e0e0e0;
+    padding: 2rem;
+    position: relative;
+}
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('assets/img/paper-texture.jpg');
+    opacity: 0.07;
+    pointer-events: none;
+}
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: rgba(20, 20, 25, 0.85);
+    backdrop-filter: blur(12px);
+    border-radius: 2rem;
+    padding: 2rem;
+    border: 1px solid #c97a5a;
+    position: relative;
+    z-index: 2;
+}
+.title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.2rem;
+    text-align: center;
+    color: #c97a5a;
+    margin-bottom: 1.5rem;
+}
+.feedback-card {
+    background: rgba(0,0,0,0.65);
+    border-left: 6px solid #c97a5a;
+    border-radius: 1.5rem;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+.intro {
+    font-family: 'Special Elite', monospace;
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+}
+.form-group {
+    margin-bottom: 1.5rem;
+}
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    font-family: 'Special Elite', monospace;
+}
+textarea {
+    width: 100%;
+    background: #1e1e1e;
+    border: 1px solid #c97a5a;
+    border-radius: 1rem;
+    padding: 0.8rem;
+    color: #e6d5c0;
+    font-family: 'Quicksand', sans-serif;
+    resize: vertical;
+}
+.radio-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 0.5rem 0;
+}
+.radio-group label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-weight: normal;
+}
+.submit-btn, .back-btn {
+    background: rgba(0,0,0,0.7);
+    border: 1px solid #c97a5a;
+    color: #e0e0e0;
+    padding: 0.6rem 1.5rem;
+    border-radius: 3rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.submit-btn:hover, .back-btn:hover {
+    background: #c97a5a;
+    color: #0a0a0a;
+}
+.thanks-message {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: #2a5a2a;
+    border-radius: 1rem;
+    text-align: center;
+    font-family: 'Special Elite', monospace;
+}
+.hidden {
+    display: none;
+}
+.actions {
+    text-align: center;
+}
+#threadCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}

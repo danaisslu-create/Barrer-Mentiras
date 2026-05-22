@@ -57,21 +57,33 @@ drawThreads();
 function getDecisionText() {
     const decision = localStorage.getItem('decision');
     const subDecision = localStorage.getItem('subDecision');
+    const abrirSubDecision = localStorage.getItem('abrirSubDecision');
     let text = '';
 
     if (decision === 'ignorar') {
         text = '🔒 Ignoraste el hilo. Preferiste la rutina, pero la duda te persigue.';
+        const peso = localStorage.getItem('ignorarWeight');
+        if (peso && parseInt(peso) > 50) {
+            text += ' La culpa te carcome, nunca volverás a dormir igual.';
+        }
     } else if (decision === 'conservar') {
         text = '🔍 Conservaste el hilo. ';
         if (subDecision === 'investigar') {
-            text += 'Decidiste investigar los rastros. El coche sigue afuera.';
+            text += 'Decidiste investigar los rastros. El coche sigue afuera, vigilándote.';
         } else if (subDecision === 'quemar') {
-            text += 'Quemaste el hilo. Las cenizas aún pesan.';
+            text += 'Quemaste el hilo. Las cenizas aún pesan en el aire.';
         } else {
             text += 'No tomaste una segunda decisión clara. El hilo sigue ahí, latiendo.';
         }
     } else if (decision === 'abrir') {
-        text = '🚪 Dejaste la bolsa entreabierta. La periodista leyó el hilo... y todo se apagó.';
+        text = '🚪 Dejaste la bolsa entreabierta. La periodista leyó el hilo... ';
+        if (abrirSubDecision === 'proteger') {
+            text += 'Intentaste protegerla, pero ambos desaparecieron.';
+        } else if (abrirSubDecision === 'huir') {
+            text += 'Huir fue tu instinto, pero la culpa te persigue.';
+        } else {
+            text += 'y todo se apagó.';
+        }
     } else {
         text = '❓ No se registró ninguna decisión. Quizás empezaste de nuevo.';
     }
@@ -84,16 +96,57 @@ if (decisionDiv) {
 }
 
 // =========================
-// 3. BOTONES DE NAVEGACIÓN
+// 3. MÚSICA DE FONDO CON PLAY/PAUSE
+// =========================
+document.addEventListener('DOMContentLoaded', () => {
+    const music = document.getElementById('bgMusic');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    if (!music || !playPauseBtn) return;
+    
+    let musicPlaying = false;
+    music.volume = 0.3;
+    
+    // Intentar autoplay (muchos navegadores lo bloquean)
+    music.play().then(() => {
+        musicPlaying = true;
+        playPauseBtn.innerHTML = '🔊 Pausar música';
+    }).catch(e => {
+        console.log("Autoplay bloqueado, esperando interacción del usuario");
+        playPauseBtn.innerHTML = '🔇 Reproducir música';
+        musicPlaying = false;
+    });
+    
+    playPauseBtn.addEventListener('click', () => {
+        if (musicPlaying) {
+            music.pause();
+            playPauseBtn.innerHTML = '🔇 Reproducir música';
+            musicPlaying = false;
+        } else {
+            music.play().then(() => {
+                playPauseBtn.innerHTML = '🔊 Pausar música';
+                musicPlaying = true;
+            }).catch(err => console.log("Error al reproducir:", err));
+        }
+    });
+});
+
+// =========================
+// 4. BOTONES DE NAVEGACIÓN
 // =========================
 document.getElementById('restartBtn').addEventListener('click', () => {
     // Limpiar localStorage para empezar de verdad
     localStorage.removeItem('decision');
     localStorage.removeItem('subDecision');
+    localStorage.removeItem('abrirSubDecision');
+    localStorage.removeItem('ignorarWeight');
     window.location.href = 'index.html';
 });
 
 document.getElementById('homeBtn').addEventListener('click', () => {
-    // No limpiamos localStorage para mantener el recuerdo de la partida, pero redirigimos al inicio
+    // No limpiamos localStorage para mantener el recuerdo de la partida
     window.location.href = 'index.html';
+});
+
+document.getElementById('feedbackBtn').addEventListener('click', () => {
+    window.location.href = 'feedback.html';
 });

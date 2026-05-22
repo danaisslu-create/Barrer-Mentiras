@@ -11,6 +11,16 @@
 
     <div class="container">
         <h1 class="title">✦ EXPEDIENTE CLASIFICADO ✦</h1>
+        
+        <!-- Reproductor de música -->
+        <div class="music-player">
+            <button id="playPauseBtn" class="music-btn">🔊 Cargando...</button>
+            <audio id="bgMusic" loop preload="auto">
+                <source src="assets/audio/creditos-music.mp3" type="audio/mpeg">
+                Tu navegador no soporta audio.
+            </audio>
+        </div>
+
         <div class="credits-card">
             <h2 class="subtitle">CRÉDITOS</h2>
 
@@ -23,7 +33,7 @@
 
             <div class="credits-section">
                 <h3>✦ NARRATIVA Y GUIÓN ✦</h3>
-                <p>Cuento original "Los Hilos del Poder" escritó por el equipo de creación</p>
+                <p>Cuento original "Los Hilos del Poder" escrito por el equipo de creación</p>
                 <p>Adaptación interactiva: El equipo de Creación</p>
             </div>
 
@@ -35,7 +45,7 @@
 
             <div class="credits-section">
                 <h3>✦ ARTE Y DOCUMENTOS ✦</h3>
-                <p>Imágenes de archivo: expedientes censurados, sellos confidenciales, imagenes creadas por banana pro</p>
+                <p>Imágenes de archivo: expedientes censurados, sellos confidenciales, imágenes creadas por banana pro</p>
                 <p>Texturas: papel antiguo, manchas</p>
             </div>
 
@@ -67,10 +77,10 @@
         <div class="actions">
             <button id="restartBtn">◀ Volver a empezar</button>
             <button id="homeBtn">🏠 Ir al inicio</button>
+            <button id="feedbackBtn" class="feedback-button">✍️ Compartir opinión</button>
         </div>
     </div>
 
-    <!-- Canvas de hilos -->
     <canvas id="threadCanvas"></canvas>
 
     <script src="creditos.js"></script>
